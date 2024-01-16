@@ -1,5 +1,7 @@
 langchain
+dotenv
 openai
 streamlit
 plotly
 pandas
+pygwalker
