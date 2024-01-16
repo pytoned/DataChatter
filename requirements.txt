@@ -1,4 +1,5 @@
 langchain
+langchain-experimental
 python-dotenv
 openai
 streamlit
