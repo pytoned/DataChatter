@@ -16,10 +16,10 @@ def main():
     
     load_dotenv()
     
-    st.set_page_config(page_title="Visualize and chat with your Excel/CSV files 📈", page_icon=":shark:", layout="wide")
-    st.header("Visualize and chat with your Excel/CSV files 📈")
+    st.set_page_config(page_title="Visualize and chat with your Excel/CSV files 📈", page_icon=":bar_chart:", layout="wide")
+    st.header("Visualize and chat with your Excel/CSV files 🔎 📈")
 
-    user_file = st.file_uploader("Upload your Excel/CSV file", type=["csv", "xlsx"])
+    user_file = st.file_uploader("Upload your Excel/CSV file ❣️", type=["csv", "xlsx"])
     
     df = None
     
