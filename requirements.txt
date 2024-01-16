@@ -1,7 +1,8 @@
+streamlit
 langchain
 langchain-experimental
 langchain-openai
-tabulate
-streamlit
 pandas
+openpyxl
+tabulate
 pygwalker
