@@ -1,5 +1,6 @@
 
 import streamlit as st
+import json
 import streamlit.components.v1 as components
 import pandas as pd
 import pygwalker as pyg
@@ -11,6 +12,13 @@ from langchain.agents.agent_types import AgentType
 #from langchain.agents import load_tools
 #import plotly.express as px
 
+def load_api_key(secrets_file="secrets.json"):
+    with open(secrets_file) as f:
+        secrets = json.load(f)
+    return secrets["OPENAI_API_KEY"]
+
+OPENAI_API_KEY = load_api_key()
+ChatOpenAI.openai_api_key = OPENAI_API_KEY
 
 def main():
     
@@ -19,9 +27,9 @@ def main():
     st.set_page_config(page_title="Visualize and chat with your Excel/CSV files 📈", page_icon=":bar_chart:", layout="wide")
     st.header("Visualize and chat with your Excel/CSV files 🔎 📈")
 
-    with st.sidebar:
-        OPENAI_API_KEY = st.text_input("OpenAI API Key", type="password")
-        "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
+    # with st.sidebar:
+    #     OPENAI_API_KEY = st.text_input("OpenAI API Key", type="password")
+    #     "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
 
 
     user_file = st.file_uploader("Upload your Excel/CSV file ❣️", type=["csv", "xlsx"])
