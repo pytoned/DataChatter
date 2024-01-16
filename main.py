@@ -7,12 +7,13 @@ from langchain_experimental.agents.agent_toolkits import create_pandas_dataframe
 from langchain_openai import ChatOpenAI
 from langchain.agents.agent_types import AgentType
 
-def load_api_key(secrets_file="secrets.json"):
-    with open(secrets_file) as f:
-        secrets = json.load(f)
-    return secrets["OPENAI_API_KEY"]
 
-OPENAI_API_KEY = load_api_key()
+# def load_api_key(secrets_file="secrets.json"):
+#     with open(secrets_file) as f:
+#         secrets = json.load(f)
+#     return secrets["OPENAI_API_KEY"]
+
+#OPENAI_API_KEY = load_api_key()
 
 def main():
     
@@ -22,6 +23,10 @@ def main():
     user_file = st.file_uploader("Upload your Excel/CSV file ❣️", type=["csv", "xlsx"])
     
     df = None
+    
+    with st.sidebar:
+        OPENAI_API_KEY = st.text_input("OpenAI API Key", type="password")
+        "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
     
     if user_file is not None:
         file_name = user_file.name
@@ -44,7 +49,6 @@ def main():
                 )
             
             response = agent.invoke(input_text)
-            
             if 'output' in response:
                 st.info(response['output'], icon='🤖')
             else:
@@ -53,8 +57,11 @@ def main():
         
         with st.form("my_form"):
             user_question = st.text_area("Enter question about your data:", "How many rows are there in total?")
-            submitted = st.form_submit_button("Ask")         
-            generate_response(user_question)
+            submitted = st.form_submit_button("Ask")
+            if not OPENAI_API_KEY:
+                st.info("Please enter your OpenAI API to ask questions about your data..")
+            elif submitted:
+                generate_response(user_question)
 
         # Generate the HTML using PyGWalker
         pyg_html = pyg.to_html(df=df, dark='media')
