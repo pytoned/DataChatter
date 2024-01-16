@@ -1,9 +1,10 @@
 langchain
 langchain-experimental
+langchain-openai
 tabulate
-python-dotenv
-openai
+#python-dotenv
+#openai
 streamlit
-plotly
+#plotly
 pandas
 pygwalker
